@@ -1,0 +1,442 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="description" content="BDV Global Partners: architect-led development management for sustainable data centres and modular infrastructure. London · Seoul.">
+<title>BDV Global Partners</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+/* Layout: drawing-sheet site. Each page is a "sheet" with a title block (sheet no., status), body on a 12-col grid, copper accent for live conductors only. */
+:root{
+  --bg:#F2F3F1; --panel:#FFFFFF; --ink:#14191C; --muted:#5B6469; --line:#D3D7D6; --grid:#E4E7E6;
+  --copper:#A9562A; --copper-soft:#F3E3D8; --ok:#2F6B4F; --warn:#8A5A00; --warn-soft:#F6ECD6;
+  --f-display:"Archivo","Noto Sans KR",system-ui,sans-serif;
+  --f-body:"Instrument Sans","Noto Sans KR",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --s-1:.8125rem; --s0:1rem; --s1:1.1875rem; --s2:1.5rem; --s3:2.125rem; --s4:clamp(2.25rem,5.5vw,4rem);
+  --maxw:1180px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0E1214; --panel:#151B1E; --ink:#E5E9E8; --muted:#97A2A6; --line:#2A3337; --grid:#1B2326;
+  --copper:#DE8C59; --copper-soft:#3A2519; --ok:#7FC3A0; --warn:#E3B45A; --warn-soft:#3A2F17; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1214; --panel:#151B1E; --ink:#E5E9E8; --muted:#97A2A6; --line:#2A3337; --grid:#1B2326;
+  --copper:#DE8C59; --copper-soft:#3A2519; --ok:#7FC3A0; --warn:#E3B45A; --warn-soft:#3A2F17; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:var(--s0);line-height:1.6}
+:root[data-lang="ko"] .en, :root:not([data-lang="ko"]) .ko{display:none!important}
+:root[data-lang="ko"] body{word-break:keep-all}
+a{color:inherit}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);font-stretch:85%;line-height:1.08;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:var(--s4);font-weight:750}
+h2{font-size:var(--s3);font-weight:700}
+h3{font-size:var(--s1);font-weight:650;font-stretch:95%}
+p{margin:0;max-width:66ch}
+.mono{font-family:var(--f-mono);font-size:var(--s-1);letter-spacing:.02em}
+.eyebrow{font-family:var(--f-mono);font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:var(--copper)}
+.muted{color:var(--muted)}
+
+/* header */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;gap:20px;padding-block:14px}
+.logo{display:flex;flex-direction:column;line-height:1;text-decoration:none;flex:none}
+.logo b{font-family:var(--f-display);font-weight:800;font-size:1.35rem;font-stretch:80%;letter-spacing:.02em}
+.logo span{font-family:var(--f-mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:3px}
+nav.main{display:flex;gap:2px;flex-wrap:wrap;flex:1;justify-content:flex-end}
+nav.main a{text-decoration:none;font-size:.875rem;padding:6px 10px;border-radius:2px;color:var(--muted);white-space:nowrap}
+nav.main a:hover{color:var(--ink)}
+nav.main a[aria-current="page"]{color:var(--ink);box-shadow:inset 0 -2px 0 var(--copper)}
+.tools{display:flex;gap:8px;flex:none}
+.lang{display:flex;border:1px solid var(--line);border-radius:2px;overflow:hidden}
+.lang button{all:unset;cursor:pointer;font-family:var(--f-mono);font-size:.75rem;padding:5px 9px;color:var(--muted)}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.lang button:focus-visible,.menu:focus-visible,a:focus-visible,.btn:focus-visible{outline:2px solid var(--copper);outline-offset:2px}
+.menu{display:none;all:unset;cursor:pointer;font-family:var(--f-mono);font-size:.75rem;border:1px solid var(--line);padding:5px 10px}
+@media (max-width:980px){
+  .menu{display:inline-block}
+  nav.main{display:none;position:absolute;left:0;right:0;top:100%;background:var(--bg);border-bottom:1px solid var(--line);flex-direction:column;padding:8px max(16px,env(safe-area-inset-left,0px)) 16px}
+  nav.main.open{display:flex}
+  .bar{position:relative;justify-content:space-between}
+}
+
+/* draft banner */
+.draft{background:var(--warn-soft);color:var(--warn);font-family:var(--f-mono);font-size:.72rem;padding-block:6px;text-align:center}
+
+/* sheet */
+.sheet{padding-block:56px 72px}
+.titleblock{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line);margin-bottom:40px;background:var(--panel)}
+.titleblock div{padding:8px 12px;border-right:1px solid var(--line);min-width:0}
+.titleblock div:last-child{border-right:0}
+.titleblock small{display:block;font-family:var(--f-mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.titleblock strong{font-family:var(--f-mono);font-weight:500;font-size:.8rem}
+@media (max-width:600px){.titleblock{grid-template-columns:repeat(2,minmax(0,1fr))}.titleblock div:nth-child(2){border-right:0}.titleblock div:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+
+.lead{font-size:var(--s1);color:var(--muted);margin-top:18px}
+.stack{display:flex;flex-direction:column;gap:18px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:1px solid var(--line)}
+@media (max-width:860px){.grid3,.grid4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.grid2,.grid3,.grid4{grid-template-columns:minmax(0,1fr)}}
+.section{margin-top:64px;display:flex;flex-direction:column;gap:24px}
+.cell{padding:22px 20px 24px 0;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:10px;min-width:0}
+.grid4 .cell{padding-right:20px}
+.cell .tag{font-family:var(--f-mono);font-size:.7rem;color:var(--copper);letter-spacing:.08em}
+ul.ticks{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px}
+ul.ticks li{padding-left:18px;position:relative}
+ul.ticks li::before{content:"";position:absolute;left:0;top:.72em;width:9px;height:1px;background:var(--copper)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:40px;align-items:center}
+@media (max-width:860px){.hero{grid-template-columns:minmax(0,1fr)}}
+.hero h1 em{font-style:normal;color:var(--copper)}
+.strap{font-family:var(--f-mono);font-size:.8rem;color:var(--ink);margin-top:20px;display:flex;flex-wrap:wrap;gap:6px 16px}
+.strap span::before{content:"— ";color:var(--copper)}
+.plan{width:100%;height:auto;max-width:100%;border:1px solid var(--line);background:var(--panel)}
+.plan .g{stroke:var(--grid)} .plan .w{stroke:var(--ink);fill:none} .plan .m{fill:var(--panel);stroke:var(--ink)}
+.plan .c{stroke:var(--copper)} .plan .cf{fill:var(--copper)} .plan text{fill:var(--muted);font-family:var(--f-mono);font-size:9px}
+.ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{display:inline-block;text-decoration:none;font-weight:600;font-size:.9rem;padding:11px 18px;border:1px solid var(--ink);border-radius:2px;cursor:pointer;background:none;color:var(--ink);font-family:var(--f-body)}
+.btn.primary{background:var(--ink);color:var(--bg)}
+.btn:hover{border-color:var(--copper)}
+
+/* gateway */
+.gates{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));border:1px solid var(--line);background:var(--panel)}
+.gate{padding:14px 12px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:6px;min-width:0}
+.gate:last-child{border-right:0}
+.gate b{font-family:var(--f-mono);font-size:.8rem;color:var(--copper)}
+.gate span{font-size:.85rem;line-height:1.35}
+@media (max-width:980px){.gates{grid-template-columns:repeat(4,minmax(0,1fr))}.gate{border-bottom:1px solid var(--line)}}
+@media (max-width:520px){.gates{grid-template-columns:minmax(0,1fr)}.gate{border-right:0}}
+
+/* audiences */
+.aud{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border:1px solid var(--line);background:var(--panel)}
+.aud > div{padding:22px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:10px;min-width:0}
+.aud > div:last-child{border-right:0}
+@media (max-width:760px){.aud{grid-template-columns:minmax(0,1fr)}.aud > div{border-right:0;border-bottom:1px solid var(--line)}.aud > div:last-child{border-bottom:0}}
+
+/* evidence */
+.figure{display:flex;flex-direction:column;gap:6px;padding:20px 0;border-top:1px solid var(--ink)}
+.figure .num{font-family:var(--f-display);font-weight:750;font-size:var(--s3);font-stretch:80%;font-variant-numeric:tabular-nums}
+.figure a{font-family:var(--f-mono);font-size:.72rem;color:var(--muted)}
+
+/* projects */
+.status{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border:1px solid currentColor;border-radius:2px;width:max-content}
+.status.prior{color:var(--muted)} .status.review{color:var(--warn)} .status.bdv{color:var(--ok)}
+.proj{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:24px;padding:24px 0;border-top:1px solid var(--line)}
+@media (max-width:640px){.proj{grid-template-columns:minmax(0,1fr);gap:10px}}
+.empty{border:1px dashed var(--line);padding:22px;color:var(--muted)}
+
+/* form */
+form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;background:var(--panel);border:1px solid var(--line);padding:24px}
+@media (max-width:600px){form{grid-template-columns:minmax(0,1fr)}}
+label{display:flex;flex-direction:column;gap:6px;font-size:.85rem;font-weight:500;min-width:0}
+input,select,textarea{font:inherit;font-weight:400;padding:10px 12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:2px;width:100%}
+textarea{min-height:120px;resize:vertical}
+.full{grid-column:1/-1}
+.radios{display:flex;flex-wrap:wrap;gap:8px}
+.radios label{flex-direction:row;align-items:center;gap:8px;border:1px solid var(--line);padding:8px 12px;cursor:pointer;font-weight:400}
+.radios input{width:auto}
+.notice{font-size:.8rem;color:var(--muted)}
+.sent{color:var(--ok);font-family:var(--f-mono);font-size:.8rem}
+
+footer{border-top:1px solid var(--line);padding-block:28px 40px;font-size:.8rem;color:var(--muted)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 32px;justify-content:space-between}
+[data-view]{animation:in .35s ease both}
+@keyframes in{from{opacity:.4;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){[data-view]{animation:none}}
+</style>
+</head><body>
+
+<div class="draft"><span class="en">DESIGN DRAFT v1 · 14 Nov 2026 · Highlighted items need founder confirmation before publishing</span><span class="ko">디자인 시안 v1 · 2026-11-14 · 공개 전 대표 확인이 필요한 항목이 있습니다</span></div>
+
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="#home"><b>BDV</b><span>Global Partners</span></a>
+    <nav class="main" id="nav">
+      <a href="#home"><span class="en">Home</span><span class="ko">홈</span></a>
+      <a href="#what-we-do"><span class="en">What We Do</span><span class="ko">서비스</span></a>
+      <a href="#data-centres"><span class="en">Data Centres</span><span class="ko">데이터센터</span></a>
+      <a href="#modular"><span class="en">Modular Infrastructure</span><span class="ko">모듈러 인프라</span></a>
+      <a href="#sustainability"><span class="en">Sustainability</span><span class="ko">지속가능성</span></a>
+      <a href="#projects"><span class="en">Projects</span><span class="ko">프로젝트</span></a>
+      <a href="#about"><span class="en">About BDV</span><span class="ko">회사소개</span></a>
+      <a href="#contact"><span class="en">Contact</span><span class="ko">문의</span></a>
+    </nav>
+    <div class="tools">
+      <div class="lang" role="group" aria-label="Language">
+        <button id="lang-en" type="button" aria-pressed="true">EN</button>
+        <button id="lang-ko" type="button" aria-pressed="false">한국어</button>
+      </div>
+      <button class="menu" id="menu" type="button" aria-expanded="false" aria-controls="nav">MENU</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- HOME -->
+<section class="sheet" data-view="home">
+  <div class="hero">
+    <div>
+      <div class="eyebrow">London · Seoul</div>
+      <h1 style="margin-top:14px"><span class="en">Designing the future of <em>sustainable digital infrastructure.</em></span><span class="ko">지속가능한 <em>디지털 인프라</em>의 미래를 설계합니다.</span></h1>
+      <div class="strap"><span class="en">Architect-led development</span><span class="ko">건축가 주도 개발</span><span class="en">Sustainable infrastructure</span><span class="ko">지속가능한 인프라</span><span class="en">Modular delivery</span><span class="ko">모듈러 딜리버리</span></div>
+      <p class="lead"><span class="en">We bring landowners, investors, architects, engineers and manufacturers together to develop high-performance digital infrastructure, from site feasibility to project delivery.</span><span class="ko">토지주, 투자자, 건축가, 엔지니어, 제조사를 하나의 팀으로 묶어 부지 타당성 검토부터 준공까지 고성능 디지털 인프라 개발을 이끕니다.</span></p>
+      <div class="ctas">
+        <a class="btn primary" href="#contact"><span class="en">Discuss a site</span><span class="ko">부지 상담하기</span></a>
+        <a class="btn" href="#what-we-do"><span class="en">How we work</span><span class="ko">일하는 방식</span></a>
+      </div>
+    </div>
+    <svg class="plan" viewBox="0 0 400 300" role="img" aria-label="Schematic plan of a modular data hall">
+      <g class="g" stroke-width="1">
+        <path d="M0 30H400M0 60H400M0 90H400M0 120H400M0 150H400M0 180H400M0 210H400M0 240H400M0 270H400"/>
+        <path d="M40 0V300M80 0V300M120 0V300M160 0V300M200 0V300M240 0V300M280 0V300M320 0V300M360 0V300"/>
+      </g>
+      <rect class="w" x="40" y="60" width="280" height="150" stroke-width="2"/>
+      <g stroke-width="1.2">
+        <rect class="m" x="52" y="74" width="60" height="26"/><rect class="m" x="118" y="74" width="60" height="26"/><rect class="m" x="184" y="74" width="60" height="26"/><rect class="m" x="250" y="74" width="60" height="26"/>
+        <rect class="m" x="52" y="122" width="60" height="26"/><rect class="m" x="118" y="122" width="60" height="26"/><rect class="m" x="184" y="122" width="60" height="26"/><rect class="m" x="250" y="122" width="60" height="26"/>
+        <rect class="m" x="52" y="170" width="60" height="26" stroke-dasharray="3 3"/><rect class="m" x="118" y="170" width="60" height="26" stroke-dasharray="3 3"/><rect class="m" x="184" y="170" width="60" height="26" stroke-dasharray="3 3"/><rect class="m" x="250" y="170" width="60" height="26" stroke-dasharray="3 3"/>
+      </g>
+      <path class="c" d="M340 70V200M320 110H340M320 160H340" stroke-width="2.5" fill="none"/>
+      <circle class="cf" cx="340" cy="70" r="4"/>
+      <path class="w" d="M40 232H320M40 228V236M320 228V236" stroke-width="1"/>
+      <text x="150" y="250">MODULE GRID 12 × 3 m</text>
+      <text x="52" y="52">DATA HALL · PHASE 1 / PHASE 2 (dashed)</text>
+      <text x="346" y="64">GRID</text>
+      <text x="346" y="214">MV</text>
+    </svg>
+  </div>
+
+  <div class="section">
+    <div class="eyebrow"><span class="en">What we do</span><span class="ko">사업 영역</span></div>
+    <div class="grid4">
+      <div class="cell"><span class="tag">DM</span><h3><span class="en">Development Management</span><span class="ko">개발관리</span></h3><p class="muted"><span class="en">Client-side leadership from site screening to handover.</span><span class="ko">부지 검토부터 인계까지 발주자 편에서 이끕니다.</span></p></div>
+      <div class="cell"><span class="tag">DC</span><h3><span class="en">Data Centres</span><span class="ko">데이터센터</span></h3><p class="muted"><span class="en">Land, power, planning and delivery for 10–40 MW facilities.</span><span class="ko">10~40MW 규모 시설의 부지·전력·인허가·실행.</span></p></div>
+      <div class="cell"><span class="tag">MC</span><h3><span class="en">Modular Construction</span><span class="ko">모듈러 건축</span></h3><p class="muted"><span class="en">Manufacturers engaged at concept stage, not after design.</span><span class="ko">설계가 끝난 뒤가 아니라 콘셉트 단계부터 제조사 참여.</span></p></div>
+      <div class="cell"><span class="tag">SU</span><h3><span class="en">Sustainability</span><span class="ko">지속가능성</span></h3><p class="muted"><span class="en">Carbon, energy, water and community built into the brief.</span><span class="ko">탄소·에너지·물·지역사회를 처음부터 설계 조건에 반영.</span></p></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="eyebrow"><span class="en">Who we work with</span><span class="ko">함께하는 고객</span></div>
+    <div class="aud">
+      <div><h3><span class="en">Landowners</span><span class="ko">토지주</span></h3><p class="muted"><span class="en">Find out whether your land can carry a data centre: power, zoning, access and value, before you spend on design.</span><span class="ko">설계비를 쓰기 전에 전력, 용도지역, 접근성, 가치를 기준으로 내 땅이 데이터센터 부지가 될 수 있는지 확인합니다.</span></p></div>
+      <div><h3><span class="en">Asset managers &amp; investors</span><span class="ko">자산운용사·투자자</span></h3><p class="muted"><span class="en">An independent development manager on your side of the table, reporting on programme, cost and risk at every gate.</span><span class="ko">발주자 편에 선 독립 개발관리자가 단계마다 일정·비용·리스크를 보고합니다.</span></p></div>
+      <div><h3><span class="en">Design &amp; delivery partners</span><span class="ko">설계·시공·제조 파트너</span></h3><p class="muted"><span class="en">Engineers, architects and modular manufacturers who want early, well-briefed involvement in credible projects.</span><span class="ko">실현 가능한 프로젝트에 초기부터 명확한 브리프로 참여하려는 엔지니어, 건축가, 모듈러 제조사.</span></p></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="eyebrow"><span class="en">Why it matters now</span><span class="ko">지금 필요한 이유</span></div>
+    <div class="grid3">
+      <div class="figure"><span class="num">1.4%</span><span><span class="en">Vacancy in primary North American data centre markets, H1 2026, a record low.</span><span class="ko">2026년 상반기 북미 주요 데이터센터 시장 공실률, 역대 최저.</span></span><a href="https://www.cbre.com/insights/books/north-america-data-center-trends-h1-2026" target="_blank" rel="noopener">CBRE, North America Data Center Trends H1 2026</a></div>
+      <div class="figure"><span class="num">+33.7%</span><span><span class="en">Year-on-year growth in primary-market supply, yet demand still outpaces it. Power and planning are the constraint.</span><span class="ko">주요 시장 공급이 전년 대비 33.7% 늘었지만 수요가 더 빠릅니다. 병목은 전력과 인허가입니다.</span></span><a href="https://www.cbre.com/insights/books/north-america-data-center-trends-h1-2026" target="_blank" rel="noopener">CBRE, H1 2026</a></div>
+      <div class="figure"><span class="num">75.5 → 15 h</span><span><span class="en">On-site installation per prefabricated white-space pod in one Schneider Electric / Compass study. A process gain, not a whole-project figure.</span><span class="ko">슈나이더·컴파스 연구에서 프리팹 화이트스페이스 포드 1개당 현장 설치 시간. 전체 공기가 아닌 특정 공정의 개선입니다.</span></span><a href="https://itbrief.co.uk/story/schneider-electric-launches-modular-ai-data-centre-design" target="_blank" rel="noopener">IT Brief, Nov 2026</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE DO -->
+<section class="sheet" data-view="what-we-do" hidden>
+  <div class="titleblock"><div><small>Sheet</small><strong>A-100</strong></div><div><small><span class="en">Title</span><span class="ko">제목</span></small><strong>What We Do</strong></div><div><small>Scope</small><strong>DM · DL · MD</strong></div><div><small>Status</small><strong>Draft v1</strong></div></div>
+  <h1><span class="en">One accountable lead, from land to live load.</span><span class="ko">부지에서 가동까지, 책임지는 한 명의 리더.</span></h1>
+  <p class="lead"><span class="en">BDV is an independent development manager. We act for the client, assemble the right specialists, and keep land, power, design, procurement and investment moving in the same direction.</span><span class="ko">BDV는 독립 개발관리 회사입니다. 발주자를 대리해 필요한 전문가를 구성하고 부지·전력·설계·조달·투자가 같은 방향으로 움직이도록 관리합니다.</span></p>
+  <div class="section">
+    <div class="grid3">
+      <div class="stack"><span class="eyebrow">01</span><h2 style="font-size:var(--s2)"><span class="en">Development Management</span><span class="ko">개발관리</span></h2>
+        <ul class="ticks"><li><span class="en">Site and power screening</span><span class="ko">부지·전력 사전 검토</span></li><li><span class="en">Feasibility and risk register</span><span class="ko">사업타당성 및 리스크 관리대장</span></li><li><span class="en">Consultant appointment and briefing</span><span class="ko">컨설턴트 선정 및 브리핑</span></li><li><span class="en">Programme, cost and reporting</span><span class="ko">일정·비용 관리 및 보고</span></li></ul></div>
+      <div class="stack"><span class="eyebrow">02</span><h2 style="font-size:var(--s2)"><span class="en">Design Leadership</span><span class="ko">설계 리더십</span></h2>
+        <ul class="ticks"><li><span class="en">Client brief and design strategy</span><span class="ko">발주자 요구조건 및 설계 전략</span></li><li><span class="en">Coordination of architect of record and MEP engineers</span><span class="ko">책임 건축사·MEP 엔지니어 조정</span></li><li><span class="en">Buildability and lifecycle review</span><span class="ko">시공성·생애주기 검토</span></li><li><span class="en">Planning strategy</span><span class="ko">인허가 전략</span></li></ul></div>
+      <div class="stack"><span class="eyebrow">03</span><h2 style="font-size:var(--s2)"><span class="en">Modular Delivery</span><span class="ko">모듈러 딜리버리</span></h2>
+        <ul class="ticks"><li><span class="en">Manufacturer-neutral market testing</span><span class="ko">특정 제조사에 묶이지 않는 비교 검토</span></li><li><span class="en">Paid design-assist agreements</span><span class="ko">유상 설계지원(디자인 어시스트) 계약</span></li><li><span class="en">Factory testing and logistics</span><span class="ko">공장 검수 및 운송 계획</span></li><li><span class="en">Site integration and commissioning</span><span class="ko">현장 통합 및 시운전</span></li></ul></div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="eyebrow"><span class="en">BDV Development Gateway</span><span class="ko">BDV 개발 게이트웨이</span></div>
+    <p class="muted"><span class="en">Every project passes defined technical and commercial tests before the next stage of spend is committed.</span><span class="ko">모든 프로젝트는 다음 단계 비용을 쓰기 전에 정해진 기술·사업 기준을 통과해야 합니다.</span></p>
+    <div class="gates">
+      <div class="gate"><b>G0</b><span><span class="en">Origination &amp; NDA</span><span class="ko">발굴·비밀유지</span></span></div>
+      <div class="gate"><b>G1</b><span><span class="en">Site &amp; power screening</span><span class="ko">부지·전력 검토</span></span></div>
+      <div class="gate"><b>G2</b><span><span class="en">Commercial feasibility</span><span class="ko">사업타당성</span></span></div>
+      <div class="gate"><b>G3</b><span><span class="en">Concept &amp; modular strategy</span><span class="ko">콘셉트·모듈러 전략</span></span></div>
+      <div class="gate"><b>G4</b><span><span class="en">Planning, power &amp; commitments</span><span class="ko">인허가·전력·계약</span></span></div>
+      <div class="gate"><b>G5</b><span><span class="en">Construction &amp; commissioning</span><span class="ko">시공·시운전</span></span></div>
+      <div class="gate"><b>G6</b><span><span class="en">Sale, lease or handover</span><span class="ko">매각·임대·인계</span></span></div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="eyebrow"><span class="en">What we are not</span><span class="ko">BDV가 하지 않는 일</span></div>
+    <p class="muted"><span class="en">BDV does not act as architect of record, land broker or fund manager. Where those roles are needed, we appoint or work alongside appropriately registered firms.</span><span class="ko">BDV는 책임 건축사, 부동산 중개, 집합투자업무를 직접 수행하지 않습니다. 해당 업무가 필요하면 등록된 전문 회사를 선정하거나 함께 수행합니다.</span></p>
+  </div>
+</section>
+
+<!-- DATA CENTRES -->
+<section class="sheet" data-view="data-centres" hidden>
+  <div class="titleblock"><div><small>Sheet</small><strong>A-200</strong></div><div><small><span class="en">Title</span><span class="ko">제목</span></small><strong>Data Centres</strong></div><div><small>Range</small><strong>10–40 MW IT</strong></div><div><small>Status</small><strong>Draft v1</strong></div></div>
+  <h1><span class="en">Bankable sites are scarce. Power is the first question.</span><span class="ko">투자 가능한 부지는 드뭅니다. 첫 질문은 전력입니다.</span></h1>
+  <p class="lead"><span class="en">We focus on 10–40 MW developments for private landowners, asset managers and infrastructure investors, and on turning a promising site into a permitted, power-secured, investable project.</span><span class="ko">민간 토지주, 자산운용사, 인프라 투자자를 위한 10~40MW 규모 개발에 집중하며, 유망한 부지를 인허가와 전력이 확보된 투자 가능한 프로젝트로 만듭니다.</span></p>
+  <div class="section grid2">
+    <div class="stack"><h3><span class="en">Site discovery &amp; screening</span><span class="ko">부지 발굴·검토</span></h3><p class="muted"><span class="en">Title, zoning, grid capacity, fibre routes, water, flood, access and neighbours, checked before design money is spent.</span><span class="ko">권리관계, 용도지역, 계통용량, 광케이블, 용수, 침수, 접근성, 주변 민원을 설계비 지출 전에 확인합니다.</span></p></div>
+    <div class="stack"><h3><span class="en">Power strategy</span><span class="ko">전력 전략</span></h3><p class="muted"><span class="en">Utility applications, connection programme, phasing of IT load against supply, and on-site generation options.</span><span class="ko">한전 등 수전 신청, 연계 일정, 공급 가능 용량에 맞춘 IT 부하 단계화, 자가발전 대안.</span></p></div>
+    <div class="stack"><h3><span class="en">Development management</span><span class="ko">개발관리</span></h3><p class="muted"><span class="en">Consultant procurement, design coordination, cost plans and reporting to the investment committee.</span><span class="ko">컨설턴트 조달, 설계 조정, 비용계획, 투자심의위원회 보고.</span></p></div>
+    <div class="stack"><h3><span class="en">Sustainable data centres</span><span class="ko">친환경 데이터센터</span></h3><p class="muted"><span class="en">Efficiency targets, heat reuse and lower embodied carbon written into the brief from day one.</span><span class="ko">효율 목표, 폐열 재사용, 내재탄소 저감을 첫날부터 설계 조건에 넣습니다.</span></p></div>
+  </div>
+  <div class="section">
+    <div class="eyebrow"><span class="en">Site screening checklist (G1)</span><span class="ko">부지 검토 체크리스트 (G1)</span></div>
+    <div class="grid4">
+      <div class="cell"><span class="tag">POWER</span><p><span class="en">Grid capacity, substation distance, connection date</span><span class="ko">계통 용량, 변전소 거리, 연계 시점</span></p></div>
+      <div class="cell"><span class="tag">LAND</span><p><span class="en">Title, zoning, area, height and coverage limits</span><span class="ko">권리관계, 용도지역, 면적, 높이·건폐율 제한</span></p></div>
+      <div class="cell"><span class="tag">FIBRE</span><p><span class="en">Diverse routes and latency to demand centres</span><span class="ko">이중 경로 및 수요지까지 지연시간</span></p></div>
+      <div class="cell"><span class="tag">ENV</span><p><span class="en">Water, flood, noise, heat and community impact</span><span class="ko">용수, 침수, 소음, 열, 지역사회 영향</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- MODULAR -->
+<section class="sheet" data-view="modular" hidden>
+  <div class="titleblock"><div><small>Sheet</small><strong>A-300</strong></div><div><small><span class="en">Title</span><span class="ko">제목</span></small><strong>Modular Infrastructure</strong></div><div><small>Stage</small><strong>G2–G3 entry</strong></div><div><small>Status</small><strong>Draft v1</strong></div></div>
+  <h1><span class="en">Bring the factory into the design, not after it.</span><span class="ko">설계가 끝난 뒤가 아니라, 설계 안으로 공장을 들입니다.</span></h1>
+  <p class="lead"><span class="en">Manufacturers join at concept stage under a paid design-assist agreement, so structural grids, module sizes, transport, lifting, fire strategy and service interfaces are solved once.</span><span class="ko">제조사는 콘셉트 단계에 유상 설계지원 계약으로 참여합니다. 구조 그리드, 모듈 크기, 운송, 양중, 방재, 설비 접점을 한 번에 해결합니다.</span></p>
+  <div class="section grid3">
+    <div class="stack"><h3><span class="en">Manufacturer collaboration</span><span class="ko">제조사 협업</span></h3><p class="muted"><span class="en">We run competitive comparisons and keep the client free to choose. No single-supplier lock-in before costs are tested.</span><span class="ko">경쟁 비교를 통해 발주자의 선택권을 지킵니다. 비용 검증 전에 단일 공급사에 묶이지 않습니다.</span></p></div>
+    <div class="stack"><h3><span class="en">Design optimisation</span><span class="ko">설계 최적화</span></h3><p class="muted"><span class="en">Module dimensions set by road transport and crane limits, not by habit.</span><span class="ko">모듈 치수는 관행이 아니라 도로 운송과 크레인 한계로 정합니다.</span></p></div>
+    <div class="stack"><h3><span class="en">Factory to site</span><span class="ko">공장에서 현장까지</span></h3><p class="muted"><span class="en">Factory acceptance tests, logistics, site integration and integrated commissioning.</span><span class="ko">공장 검수, 물류, 현장 통합, 통합 시운전.</span></p></div>
+  </div>
+  <div class="section">
+    <div class="eyebrow"><span class="en">Evidence, read carefully</span><span class="ko">근거와 해석</span></div>
+    <p><span class="en">A Schneider Electric and Compass Datacenters study reported on-site installation falling from 75.5 to 15 hours per prefabricated white-space pod. That is a gain on one assembly process. Whole-project programme savings depend on power, planning and procurement too, and BDV plans them case by case.</span><span class="ko">슈나이더 일렉트릭과 컴파스 데이터센터의 연구에서는 프리팹 화이트스페이스 포드 1개당 현장 설치 시간이 75.5시간에서 15시간으로 줄었습니다. 이는 특정 조립 공정의 개선입니다. 전체 공기 단축은 전력·인허가·조달에도 달려 있어 BDV는 프로젝트별로 계획합니다.</span></p>
+  </div>
+</section>
+
+<!-- SUSTAINABILITY -->
+<section class="sheet" data-view="sustainability" hidden>
+  <div class="titleblock"><div><small>Sheet</small><strong>A-400</strong></div><div><small><span class="en">Title</span><span class="ko">제목</span></small><strong>Sustainability</strong></div><div><small>Metrics</small><strong>PUE · WUE · kgCO₂e</strong></div><div><small>Status</small><strong>Draft v1</strong></div></div>
+  <h1><span class="en">Sustainability that lenders can underwrite.</span><span class="ko">금융기관이 인정하는 지속가능성.</span></h1>
+  <p class="lead"><span class="en">We treat environmental performance as part of the investment case, measured in the units operators and lenders use.</span><span class="ko">환경 성능을 투자 논리의 일부로 다루며, 운영사와 금융기관이 쓰는 지표로 측정합니다.</span></p>
+  <div class="section grid4" style="border-top:0">
+    <div class="cell"><span class="tag">CARBON</span><h3><span class="en">Carbon</span><span class="ko">탄소</span></h3><p class="muted"><span class="en">Whole-life carbon assessment; lower-carbon structure and reuse of modules.</span><span class="ko">전과정 탄소 평가, 저탄소 구조, 모듈 재사용.</span></p></div>
+    <div class="cell"><span class="tag">ENERGY</span><h3><span class="en">Energy</span><span class="ko">에너지</span></h3><p class="muted"><span class="en">PUE targets set at brief stage; renewable supply options.</span><span class="ko">기획 단계에서 PUE 목표 설정, 재생에너지 조달 검토.</span></p></div>
+    <div class="cell"><span class="tag">WATER</span><h3><span class="en">Water</span><span class="ko">물</span></h3><p class="muted"><span class="en">Cooling choices tested against local water stress.</span><span class="ko">지역 물 부족 여건에 맞춘 냉각 방식 선택.</span></p></div>
+    <div class="cell"><span class="tag">REUSE</span><h3><span class="en">Heat &amp; reuse</span><span class="ko">폐열·재사용</span></h3><p class="muted"><span class="en">Waste-heat offtake to district heating or neighbours where viable.</span><span class="ko">가능한 경우 지역난방·인근 수요처로 폐열 공급.</span></p></div>
+  </div>
+  <div class="section">
+    <div class="eyebrow"><span class="en">Precedents we learn from</span><span class="ko">참고 사례 (BDV 수행 아님)</span></div>
+    <div class="grid2">
+      <div class="figure"><span class="num">PUE 1.15–1.3</span><span><span class="en">Designed annual PUE for EcoDataCenter's Falun expansion, Sweden: renewable power and surplus heat reused through a CHP plant.</span><span class="ko">스웨덴 에코데이터센터 팔룬 증설의 설계 연간 PUE. 재생에너지 100%, 열병합발전소를 통한 폐열 재사용.</span></span><a href="https://www.nib.int/loan/ecodc-ab-59238" target="_blank" rel="noopener">Nordic Investment Bank, 2024</a></div>
+      <div class="figure"><span class="num">5.6 MW · LEED Platinum</span><span><span class="en">Corgan's Project Mills, Nevada: data hall wings added as demand requires.</span><span class="ko">미국 네바다 코건 Project Mills. 수요에 따라 데이터홀 동을 증설하는 구조.</span></span><a href="https://www.corgan.com/projects/confidential-technology-client-project-mills-data-center" target="_blank" rel="noopener">Corgan</a></div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="eyebrow"><span class="en">Community</span><span class="ko">지역사회</span></div>
+    <p class="muted"><span class="en">Early engagement on noise, traffic, landscape and local jobs, because community opposition is now a planning risk in its own right.</span><span class="ko">소음, 교통, 경관, 지역 일자리를 초기부터 협의합니다. 주민 반대는 이제 그 자체로 인허가 리스크입니다.</span></p>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="sheet" data-view="projects" hidden>
+  <div class="titleblock"><div><small>Sheet</small><strong>A-500</strong></div><div><small><span class="en">Title</span><span class="ko">제목</span></small><strong>Projects</strong></div><div><small>Key</small><strong>BDV · Founder · Review</strong></div><div><small>Status</small><strong>Draft v1</strong></div></div>
+  <h1><span class="en">What we have done, and in what role.</span><span class="ko">무엇을, 어떤 역할로 했는지.</span></h1>
+  <p class="lead"><span class="en">Every entry is labelled. BDV commissions, the founder's prior work at other firms, and opportunities under review are never mixed.</span><span class="ko">모든 항목에 구분 표시를 합니다. BDV 수임 실적, 대표의 이전 회사 경력, 검토 중인 기회를 섞지 않습니다.</span></p>
+  <div class="section">
+    <div class="eyebrow"><span class="en">BDV commissions</span><span class="ko">BDV 수임 실적</span></div>
+    <div class="empty"><span class="en">First BDV mandates will be listed here once appointed and approved for publication by the client.</span><span class="ko">BDV가 수임하고 발주처가 공개를 승인한 프로젝트부터 이곳에 게시합니다.</span></div>
+  </div>
+  <div class="section">
+    <div class="eyebrow"><span class="en">Founder experience · prior practice</span><span class="ko">대표 이전 경력</span></div>
+    <div>
+      <div class="proj"><div class="stack" style="gap:8px"><span class="status prior"><span class="en">Prior role</span><span class="ko">이전 경력</span></span><span class="mono muted">2020–2023 · Harrow, UK</span></div><div class="stack" style="gap:8px"><h3>The Greenhill Building</h3><p class="muted"><span class="en">460 m² CLT community building for Harrow Council. Founder led the project through RIBA Stages 3–5 at Chris Dyson Architects. RIBA London Award 2025.</span><span class="ko">해로우 구청 발주 460㎡ CLT 커뮤니티 건물. 대표가 Chris Dyson Architects 재직 중 RIBA 3~5단계 프로젝트 리더. 2025 RIBA 런던 어워드.</span></p></div></div>
+      <div class="proj"><div class="stack" style="gap:8px"><span class="status prior"><span class="en">Prior role</span><span class="ko">이전 경력</span></span><span class="mono muted">2018–2020 · London, UK</span></div><div class="stack" style="gap:8px"><h3>KOKO Camden</h3><p class="muted"><span class="en">Grade II listed venue, 5,308 m². Founder contributed during consent and early construction at Archer Humphryes Architects.</span><span class="ko">2등급 등록문화재 공연장, 5,308㎡. 대표가 Archer Humphryes Architects 재직 중 인허가·초기 시공 단계 참여.</span></p></div></div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="eyebrow"><span class="en">Founder-led origination · prior roles</span><span class="ko">대표 기획 경력</span></div>
+    <div>
+      <div class="proj"><div class="stack" style="gap:8px"><span class="status prior"><span class="en">Founder origination</span><span class="ko">대표 기획</span></span><span class="mono muted">Korea</span></div><div class="stack" style="gap:8px"><h3><span class="en">200 MW data centre</span><span class="ko">국내 200MW 데이터센터</span></h3><p class="muted"><span class="en">Founder made the initial proposal and led early project planning, including modular feasibility, in a prior role. Not a BDV commission.</span><span class="ko">대표가 이전 소속에서 최초 제안과 초기 사업기획(모듈러 타당성 포함)을 주도. BDV 수임 실적 아님.</span></p></div></div>
+      <div class="proj"><div class="stack" style="gap:8px"><span class="status prior"><span class="en">Founder origination</span><span class="ko">대표 기획</span></span><span class="mono muted">Western Australia</span></div><div class="stack" style="gap:8px"><h3><span class="en">Modular apartments, private and public</span><span class="ko">민간·공공 모듈러 아파트</span></h3><p class="muted"><span class="en">Founder planned modular apartment schemes and built links with the Western Australian Government, including consortium formation for a Housing Australia Future Fund application.</span><span class="ko">대표가 민간·공공 모듈러 아파트를 기획하고 서호주 정부와의 협력 채널을 구축. 호주 HAFF 신청을 위한 컨소시엄 구성 포함.</span></p></div></div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="eyebrow"><span class="en">Opportunities under review</span><span class="ko">검토 중인 기회</span></div>
+    <div class="empty"><span class="en">BDV is reviewing data centre opportunities in Korea. They are not listed until BDV is appointed and the client agrees to publication.</span><span class="ko">BDV는 국내 데이터센터 사업 기회를 검토하고 있습니다. 수임과 발주처 동의 전에는 게시하지 않습니다.</span></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="sheet" data-view="about" hidden>
+  <div class="titleblock"><div><small>Sheet</small><strong>A-600</strong></div><div><small><span class="en">Title</span><span class="ko">제목</span></small><strong>About BDV</strong></div><div><small>Offices</small><strong>London · Seoul</strong></div><div><small>Status</small><strong>Draft v1</strong></div></div>
+  <h1><span class="en">Independent. Architect-led. Built for delivery.</span><span class="ko">독립적이고, 건축가가 이끌고, 실행에 강한 회사.</span></h1>
+  <p class="lead"><span class="en">BDV Global Partners is an independent development and delivery advisory firm working between the UK, Korea and international markets.</span><span class="ko">BDV Global Partners는 영국, 한국, 해외 시장을 잇는 독립 개발·실행 자문 회사입니다.</span></p>
+  <div class="section grid2">
+    <div class="stack"><div class="eyebrow"><span class="en">Founder</span><span class="ko">대표</span></div>
+      <h2 style="font-size:var(--s2)"><span class="en">Founder &amp; Managing Director</span><span class="ko">대표</span></h2>
+      <p class="muted"><span class="en">Founder and Managing Director. ARB-registered architect with UK architectural practice and housing development experience, including award-winning public work, followed by modular and data centre projects in Korea and abroad. Works in English and Korean with government and industry networks in Korea, Western Australia and Europe.</span><span class="ko">창업자 겸 대표. 영국 ARB 등록 건축가. 영국 건축설계사무소와 주택개발 경력(수상 공공건축 포함), 이후 국내외 모듈러·데이터센터 프로젝트 수행. 영어·한국어로 한국, 서호주, 유럽의 정부·산업 네트워크와 협업합니다.</span></p></div>
+    <div class="stack"><div class="eyebrow"><span class="en">How we work</span><span class="ko">일하는 원칙</span></div>
+      <ul class="ticks"><li><span class="en">Client-side and manufacturer-neutral</span><span class="ko">발주자 편, 제조사 중립</span></li><li><span class="en">Paid feasibility before big commitments</span><span class="ko">큰 결정 전에 유상 타당성 검토</span></li><li><span class="en">Stage gates with written approvals</span><span class="ko">서면 승인 기반 단계 관리</span></li><li><span class="en">Registered specialists for regulated roles</span><span class="ko">법정 업무는 등록 전문가와 수행</span></li></ul></div>
+  </div>
+  <div class="section">
+    <div class="eyebrow"><span class="en">Partner network</span><span class="ko">파트너 네트워크</span></div>
+    <p class="muted"><span class="en">We work with legal, finance, mission-critical engineering and modular manufacturing partners appointed per project. Partner names will appear here once agreements are in place.</span><span class="ko">법무, 재무, 미션크리티컬 엔지니어링, 모듈러 제조 파트너와 프로젝트별로 협업합니다. 파트너명은 협약 체결 후 게시합니다.</span></p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="sheet" data-view="contact" hidden>
+  <div class="titleblock"><div><small>Sheet</small><strong>A-700</strong></div><div><small><span class="en">Title</span><span class="ko">제목</span></small><strong>Contact</strong></div><div><small>Response</small><strong>2 working days</strong></div><div><small>Status</small><strong>Draft v1</strong></div></div>
+  <h1><span class="en">Start with the site, or the question.</span><span class="ko">부지든 질문이든, 거기서 시작합니다.</span></h1>
+  <p class="lead"><span class="en">Tell us who you are and what you are considering. An initial conversation is free and does not create an engagement.</span><span class="ko">어떤 분이고 무엇을 검토 중인지 알려주세요. 첫 상담은 무료이며 계약을 의미하지 않습니다.</span></p>
+  <div class="section">
+    <form id="enquiry" novalidate>
+      <div class="full stack" style="gap:8px"><span style="font-size:.85rem;font-weight:500"><span class="en">I am a</span><span class="ko">문의자 유형</span></span>
+        <div class="radios">
+          <label><input type="radio" name="who" id="who-land" value="landowner" checked><span class="en">Landowner</span><span class="ko">토지주</span></label>
+          <label><input type="radio" name="who" id="who-am" value="asset-manager"><span class="en">Asset manager</span><span class="ko">자산운용사</span></label>
+          <label><input type="radio" name="who" id="who-inv" value="investor"><span class="en">Investor</span><span class="ko">투자자</span></label>
+          <label><input type="radio" name="who" id="who-partner" value="partner"><span class="en">Engineer / manufacturer</span><span class="ko">엔지니어·제조사</span></label>
+          <label><input type="radio" name="who" id="who-other" value="other"><span class="en">Other</span><span class="ko">기타</span></label>
+        </div></div>
+      <label for="f-name"><span><span class="en">Name</span><span class="ko">이름</span></span><input id="f-name" required></label>
+      <label for="f-co"><span><span class="en">Company</span><span class="ko">회사</span></span><input id="f-co"></label>
+      <label for="f-email"><span><span class="en">Email</span><span class="ko">이메일</span></span><input id="f-email" type="email" required></label>
+      <label for="f-loc"><span><span class="en">Site location or market</span><span class="ko">부지 위치 또는 시장</span></span><input id="f-loc"></label>
+      <label for="f-msg" class="full"><span><span class="en">What are you considering?</span><span class="ko">검토 중인 내용</span></span><textarea id="f-msg"></textarea></label>
+      <div class="full" style="display:flex;gap:16px;align-items:center;flex-wrap:wrap"><button class="btn primary" type="submit"><span class="en">Send enquiry</span><span class="ko">문의 보내기</span></button><span class="sent" id="sent" hidden><span class="en">Draft only: the form will connect to the BDV inbox at build.</span><span class="ko">시안입니다. 실제 구축 시 BDV 메일함과 연결됩니다.</span></span></div>
+      <p class="notice full"><span class="en">Please do not send confidential documents through this form. We will sign an NDA before reviewing site data.</span><span class="ko">이 양식으로 기밀자료를 보내지 마세요. 부지 자료 검토 전에 비밀유지계약을 체결합니다.</span></p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer><div class="wrap">
+  <span>© 2026 BDV Global Partners · London · Seoul</span>
+  <span><span class="en">Founder experience and precedent projects are shown separately from BDV commissions.</span><span class="ko">대표 경력과 참고 사례는 BDV 수임 실적과 구분해 표시합니다.</span></span>
+</div></footer>
+
+<script>
+(function(){
+  var root=document.documentElement, views=[].slice.call(document.querySelectorAll('[data-view]')), links=[].slice.call(document.querySelectorAll('nav.main a'));
+  function show(){
+    var id=(location.hash||'#home').slice(1); if(!views.some(function(v){return v.dataset.view===id})) id='home';
+    views.forEach(function(v){v.hidden=v.dataset.view!==id});
+    links.forEach(function(a){a.getAttribute('href')==='#'+id?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current')});
+    document.getElementById('nav').classList.remove('open'); document.getElementById('menu').setAttribute('aria-expanded','false');
+    window.scrollTo(0,0);
+  }
+  function setLang(l){
+    root.setAttribute('data-lang',l);
+    document.getElementById('lang-en').setAttribute('aria-pressed',l==='en');
+    document.getElementById('lang-ko').setAttribute('aria-pressed',l==='ko');
+    try{localStorage.setItem('bdv-lang',l)}catch(e){}
+  }
+  var saved='en'; try{saved=localStorage.getItem('bdv-lang')||'en'}catch(e){}
+  setLang(saved);
+  document.getElementById('lang-en').onclick=function(){setLang('en')};
+  document.getElementById('lang-ko').onclick=function(){setLang('ko')};
+  document.getElementById('menu').onclick=function(){var n=document.getElementById('nav');n.classList.toggle('open');this.setAttribute('aria-expanded',n.classList.contains('open'))};
+  document.getElementById('enquiry').addEventListener('submit',function(e){e.preventDefault();document.getElementById('sent').hidden=false});
+  window.addEventListener('hashchange',show); show();
+})();
+</script>
+</body></html>
