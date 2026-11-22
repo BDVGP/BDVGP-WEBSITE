@@ -8,25 +8,29 @@
 <meta name="description" content="BDV Global Partners: architect-led development management for sustainable data centres and modular infrastructure. London · Seoul.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#08201C">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,300..700&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap">
+<!-- Font: Pretendard (one family for English + Korean). Change sizes in the <style> block below. -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
-:root{--deep:#08201C;--on:#E8EEEB;--muted:#9DB2AC;--copper:#E39A63;color-scheme:dark}
+:root{--deep:#08201C;--on:#E8EEEB;--muted:#9DB2AC;--copper:#E39A63;--font:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",system-ui,sans-serif;color-scheme:dark}
 *{box-sizing:border-box}
 html,body{height:100%}
-body{margin:0;background:var(--deep);color:var(--on);font-family:"Instrument Sans","Noto Sans KR",system-ui,sans-serif}
+body{margin:0;background:var(--deep);color:var(--on);font-family:var(--font)}
 .hero{position:relative;min-height:100%;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
 .hero svg.scene{position:absolute;inset:0;width:100%;height:100%}
 .wrap{position:relative;max-width:1240px;width:100%;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
-.top{padding-block:28px}
-.logo{display:flex;align-items:baseline;gap:10px}
-.logo b{font-family:"Archivo",system-ui,sans-serif;font-weight:700;font-size:1.45rem;font-stretch:78%;letter-spacing:.04em}
-.logo span,.label{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase}
-.logo span{opacity:.75}
+.top{padding-block:28px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.logo{display:flex;align-items:baseline;gap:.4em;font-size:1.25rem;letter-spacing:-.01em;color:var(--on);text-decoration:none;white-space:nowrap}
+.logo b{font-weight:800}
+.logo span{font-weight:400;opacity:.85}
+.nav{display:flex;gap:24px;font-size:.95rem;font-weight:500}
+.nav a{text-decoration:none;color:var(--on);padding:8px 14px;border:1px solid rgba(255,255,255,.28);border-radius:999px;transition:background .2s,border-color .2s}
+.nav a:hover,.nav a:focus-visible{background:rgba(227,154,99,.16);border-color:var(--copper)}
+@media (max-width:480px){.top{flex-wrap:nowrap}.logo{font-size:1.02rem}.nav a{padding:6px 11px;font-size:.82rem}}
+.label{font-size:.75rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
 .label{color:var(--copper)}
 .main{padding-block:80px 64px;display:flex;flex-direction:column;gap:22px}
-h1{font-family:"Archivo","Noto Sans KR",system-ui,sans-serif;font-weight:300;font-stretch:88%;font-size:clamp(2.4rem,6.5vw,5rem);line-height:1.02;letter-spacing:-.015em;margin:0;max-width:16ch;text-wrap:balance}
-h1 b{font-weight:600}
+h1{font-weight:300;font-size:clamp(2.4rem,6.5vw,5rem);line-height:1.02;letter-spacing:-.015em;margin:0;max-width:16ch;text-wrap:balance}
+h1 b{font-weight:700}
 p{margin:0;max-width:56ch;color:#C9D6D2;font-size:1.05rem;line-height:1.6}
 .foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:18px;border-top:1px solid rgba(255,255,255,.14);margin-top:40px;font-size:.85rem;color:var(--muted)}
 a{color:var(--on)}
@@ -54,7 +58,10 @@ a{color:var(--on)}
     <rect width="1600" height="900" fill="url(#fade)"/>
     <rect width="1600" height="900" fill="url(#side)"/>
   </svg>
-  <div class="wrap top"><div class="logo"><b>BDV</b><span>Global Partners</span></div></div>
+  <header class="wrap top">
+    <a class="logo" href="/" aria-label="BDV Global Partners home"><b>BDV</b><span>Global Partners</span></a>
+    <nav class="nav" aria-label="Main"><a href="https://bdv-global.bubbleapps.io/" target="_blank" rel="noopener">BDV Platform ↗</a></nav>
+  </header>
   <div class="wrap main">
     <span class="label">Coming soon · 준비 중</span>
     <h1>Sustainable digital infrastructure, <b>developed with care.</b></h1>
