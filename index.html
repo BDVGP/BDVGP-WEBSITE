@@ -124,6 +124,24 @@ nav.main a.platform:hover,nav.main a.platform:focus-visible{border-color:var(--c
 .dg .gnd{stroke:var(--muted)}
 .dg text{fill:var(--muted);font-family:var(--f-mono);font-size:10px;letter-spacing:.06em}
 .dg .rack{fill:var(--ink);opacity:.18}
+/* diagram animation (JS adds .ready/.play; no JS or reduced motion = static) */
+.dg .a{transform-box:view-box}
+.dg.ready .a,.dg.ready .fade{opacity:0}
+.dg.ready .draw{stroke-dasharray:1;stroke-dashoffset:1}
+.dg.play .drop{animation:dgdrop .7s cubic-bezier(.2,.9,.3,1.15) both;animation-delay:calc(var(--d,0)*.32s + var(--o,0s))}
+.dg.play .slide{animation:dgslide .75s cubic-bezier(.2,.8,.3,1) both;animation-delay:calc(var(--d,0)*.32s + var(--o,0s))}
+.dg.play .fade{animation:dgfade .5s ease both;animation-delay:calc(var(--d,0)*.32s + var(--o,0s))}
+.dg.play .draw{opacity:1;animation:dgdraw 1.1s ease-in-out both;animation-delay:var(--o,0s)}
+.dg.out{transition:opacity .45s;opacity:0}
+@keyframes dgdrop{0%{opacity:0;transform:translateY(-150px)}35%{opacity:1}100%{opacity:1;transform:none}}
+@keyframes dgslide{0%{opacity:0;transform:translateX(150px)}40%{opacity:1}100%{opacity:1;transform:none}}
+@keyframes dgfade{from{opacity:0}to{opacity:1}}
+@keyframes dgdraw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+.dgsteps{list-style:none;margin:0;padding:12px 28px 16px;display:flex;flex-wrap:wrap;gap:6px 18px;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;color:var(--muted);border-top:1px solid var(--line)}
+.dgsteps li{display:flex;gap:6px;align-items:center;transition:color .3s}
+.dgsteps li b{display:inline-grid;place-items:center;width:18px;height:18px;border:1px solid currentColor;border-radius:50%;font-weight:400;font-size:.66rem}
+.dgsteps li.on{color:var(--copper)}
+@media (prefers-reduced-motion:reduce){.dg .a,.dg .fade,.dg .draw{animation:none!important;opacity:1!important;stroke-dashoffset:0!important}}
 ul.ticks{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px}
 ul.ticks li{padding-left:18px;position:relative}
 ul.ticks li::before{content:"";position:absolute;left:0;top:.75em;width:9px;height:1px;background:var(--copper)}
@@ -290,22 +308,28 @@ footer .logo{color:var(--on-deep)}
     <div class="systems">
       <article class="system">
         <figure>
-          <svg class="dg" viewBox="0 0 520 300" role="img" aria-label="Stacked modular system elevation: load-bearing modules stacked three high">
-            <line class="gnd" x1="30" y1="250" x2="490" y2="250" stroke-width="1.5"/>
+          <svg class="dg" id="dg-stack" viewBox="0 0 520 300" role="img" aria-label="Animated stacked modular system: modules are lowered and stacked three high, then a phase 2 module is added">
+            <line class="gnd a draw" pathLength="1" x1="30" y1="250" x2="490" y2="250" stroke-width="1.5"/>
             <g stroke-width="1.4">
-              <rect class="mod" x="80" y="190" width="120" height="60"/><rect class="mod" x="200" y="190" width="120" height="60"/><rect class="mod" x="320" y="190" width="120" height="60"/>
-              <rect class="mod" x="80" y="130" width="120" height="60"/><rect class="modc" x="200" y="130" width="120" height="60"/><rect class="mod" x="320" y="130" width="120" height="60"/>
-              <rect class="mod" x="80" y="70" width="120" height="60"/><rect class="mod" x="200" y="70" width="120" height="60"/><rect class="mod" x="320" y="70" width="120" height="60" stroke-dasharray="4 4"/>
+              <rect class="mod a drop" style="--d:0;--o:.9s" x="80" y="190" width="120" height="60"/><rect class="mod a drop" style="--d:1;--o:.9s" x="200" y="190" width="120" height="60"/><rect class="mod a drop" style="--d:2;--o:.9s" x="320" y="190" width="120" height="60"/>
+              <rect class="mod a drop" style="--d:3;--o:1.3s" x="80" y="130" width="120" height="60"/><rect class="modc a drop" style="--d:4;--o:1.3s" x="200" y="130" width="120" height="60"/><rect class="mod a drop" style="--d:5;--o:1.3s" x="320" y="130" width="120" height="60"/>
+              <rect class="mod a drop" style="--d:6;--o:1.7s" x="80" y="70" width="120" height="60"/><rect class="mod a drop" style="--d:7;--o:1.7s" x="200" y="70" width="120" height="60"/>
+              <rect class="mod a drop" style="--d:10;--o:2.2s" x="320" y="70" width="120" height="60" stroke-dasharray="4 4"/>
             </g>
-            <g class="ln" stroke-width="1"><path d="M80 70V250M200 70V250M320 70V250M440 70V250" stroke-opacity=".35"/></g>
-            <g class="rack"><rect x="214" y="142" width="10" height="38"/><rect x="230" y="142" width="10" height="38"/><rect x="246" y="142" width="10" height="38"/><rect x="262" y="142" width="10" height="38"/><rect x="278" y="142" width="10" height="38"/><rect x="294" y="142" width="10" height="38"/></g>
-            <path class="ln" d="M460 70V250M455 70H465M455 250H465" stroke-width="1"/>
-            <text x="470" y="164">3 TIERS</text>
+            <g class="ln fade" style="--d:8;--o:1.9s" stroke-width="1"><path d="M80 70V250M200 70V250M320 70V250M440 70V250" stroke-opacity=".35"/></g>
+            <g class="rack fade" style="--d:9;--o:1.9s"><rect x="214" y="142" width="10" height="38"/><rect x="230" y="142" width="10" height="38"/><rect x="246" y="142" width="10" height="38"/><rect x="262" y="142" width="10" height="38"/><rect x="278" y="142" width="10" height="38"/><rect x="294" y="142" width="10" height="38"/></g>
+            <g class="fade" style="--d:8;--o:1.9s"><path class="ln" d="M460 70V250M455 70H465M455 250H465" stroke-width="1"/><text x="470" y="164">3 TIERS</text></g>
             <text x="80" y="275">MODULE = STRUCTURE · STACK · CONNECT</text>
             <text x="80" y="52">STACKED SYSTEM</text>
-            <text x="330" y="52">PHASE 2 (dashed)</text>
+            <text class="fade" style="--d:10;--o:2.4s" x="330" y="52">PHASE 2 (dashed)</text>
           </svg>
         </figure>
+        <ol class="dgsteps" data-for="dg-stack" aria-hidden="true">
+          <li data-t="0"><b>1</b><span class="en">Foundation</span><span class="ko">기초</span></li>
+          <li data-t="0.9"><b>2</b><span class="en">Lift &amp; stack modules</span><span class="ko">모듈 양중·적층</span></li>
+          <li data-t="4.5"><b>3</b><span class="en">Connect &amp; fit out</span><span class="ko">연결·설비</span></li>
+          <li data-t="5.4"><b>4</b><span class="en">Add modules to expand</span><span class="ko">모듈 추가로 증설</span></li>
+        </ol>
         <div class="txt">
           <span class="label"><span class="en">System A</span><span class="ko">방식 A</span></span>
           <h3><span class="en">Stacked modules</span><span class="ko">적층 방식</span></h3>
@@ -315,20 +339,26 @@ footer .logo{color:var(--on-deep)}
       </article>
       <article class="system">
         <figure>
-          <svg class="dg" viewBox="0 0 520 300" role="img" aria-label="Infill modular system elevation: steel frame with modules slotted into each bay">
-            <line class="gnd" x1="30" y1="250" x2="490" y2="250" stroke-width="1.5"/>
-            <g class="frame" stroke-width="3"><path d="M70 40V250M200 40V250M330 40V250M460 40V250"/><path d="M70 40H460M70 110H460M70 180H460"/></g>
+          <svg class="dg" id="dg-infill" viewBox="0 0 520 300" role="img" aria-label="Animated infill modular system: a steel frame is erected, then modules slide into each bay, and one bay is filled last">
+            <line class="gnd a draw" pathLength="1" x1="30" y1="250" x2="490" y2="250" stroke-width="1.5"/>
+            <g class="frame" stroke-width="3"><path class="a draw" pathLength="1" style="--o:.4s" d="M70 250V40M200 250V40M330 250V40M460 250V40"/><path class="a draw" pathLength="1" style="--o:1.2s" d="M70 40H460M70 110H460M70 180H460"/></g>
             <g stroke-width="1.2">
-              <rect class="mod" x="78" y="186" width="114" height="60"/><rect class="mod" x="208" y="186" width="114" height="60"/><rect class="mod" x="338" y="186" width="114" height="60"/>
-              <rect class="modc" x="78" y="116" width="114" height="60"/><rect class="mod" x="208" y="116" width="114" height="60"/><rect class="mod" x="338" y="116" width="114" height="60"/>
-              <rect class="mod" x="78" y="46" width="114" height="60"/><rect class="mod" x="338" y="46" width="114" height="60"/>
+              <rect class="mod a slide" style="--d:0;--o:2.3s" x="78" y="186" width="114" height="60"/><rect class="mod a slide" style="--d:1;--o:2.3s" x="208" y="186" width="114" height="60"/><rect class="mod a slide" style="--d:2;--o:2.3s" x="338" y="186" width="114" height="60"/>
+              <rect class="modc a slide" style="--d:3;--o:2.3s" x="78" y="116" width="114" height="60"/><rect class="mod a slide" style="--d:4;--o:2.3s" x="208" y="116" width="114" height="60"/><rect class="mod a slide" style="--d:5;--o:2.3s" x="338" y="116" width="114" height="60"/>
+              <rect class="mod a slide" style="--d:6;--o:2.3s" x="78" y="46" width="114" height="60"/><rect class="mod a slide" style="--d:7;--o:2.3s" x="338" y="46" width="114" height="60"/>
             </g>
-            <g class="ln" stroke-width="1.2"><rect x="208" y="46" width="114" height="60" stroke-dasharray="4 4"/><path d="M265 18V40M258 32L265 40L272 32"/></g>
-            <g class="rack"><rect x="90" y="128" width="10" height="38"/><rect x="106" y="128" width="10" height="38"/><rect x="122" y="128" width="10" height="38"/><rect x="138" y="128" width="10" height="38"/><rect x="154" y="128" width="10" height="38"/><rect x="170" y="128" width="10" height="38"/></g>
+            <g class="ln fade" style="--d:8;--o:2.5s" stroke-width="1.2"><rect x="208" y="46" width="114" height="60" stroke-dasharray="4 4"/><path d="M265 18V40M258 32L265 40L272 32"/></g>
+            <rect class="modc a drop" style="--d:10;--o:2.6s" x="208" y="46" width="114" height="60" stroke-width="1.2"/>
+            <g class="rack fade" style="--d:5;--o:2.6s"><rect x="90" y="128" width="10" height="38"/><rect x="106" y="128" width="10" height="38"/><rect x="122" y="128" width="10" height="38"/><rect x="138" y="128" width="10" height="38"/><rect x="154" y="128" width="10" height="38"/><rect x="170" y="128" width="10" height="38"/></g>
             <text x="70" y="275">STEEL FRAME + MODULE INFILL</text>
-            <text x="285" y="22">MODULE SLID INTO BAY</text>
+            <text class="fade" style="--d:8;--o:2.5s" x="285" y="22">MODULE SLID INTO BAY</text>
           </svg>
         </figure>
+        <ol class="dgsteps" data-for="dg-infill" aria-hidden="true">
+          <li data-t="0"><b>1</b><span class="en">Steel frame</span><span class="ko">철골 프레임</span></li>
+          <li data-t="2.3"><b>2</b><span class="en">Slide modules into bays</span><span class="ko">모듈을 베이에 삽입</span></li>
+          <li data-t="5.8"><b>3</b><span class="en">Swap or add any bay</span><span class="ko">베이별 교체·추가</span></li>
+        </ol>
         <div class="txt">
           <span class="label"><span class="en">System B</span><span class="ko">방식 B</span></span>
           <h3><span class="en">Frame and infill</span><span class="ko">인필 방식</span></h3>
@@ -393,7 +423,7 @@ footer .logo{color:var(--on-deep)}
     </div>
     <div class="about">
       <div style="display:flex;flex-direction:column;gap:14px"><span class="label"><span class="en">Leadership</span><span class="ko">리더십</span></span>
-        <p><span class="en">Led by a UK-trained architect with experience across UK practice, housing development, modular construction and data centre origination in Korea and abroad. Works in English and Korean with government and industry networks in Korea, Australia and Europe.</span><span class="ko">영국에서 수련한 건축가가 이끕니다. 영국 설계사무소, 주택개발, 모듈러 건축, 국내외 데이터센터 사업 기획 경험을 갖추고, 영어·한국어로 한국, 호주, 유럽의 정부·산업 네트워크와 협업합니다.</span></p></div>
+        <p><span class="en">More than ten years in the UK as a project manager and architect, with housing development, modular construction and data centre origination experience in Korea and abroad. Works in English and Korean with government and industry networks in Korea, Australia and Europe.</span><span class="ko">영국에서 10년 이상 프로젝트 PM 및 건축사로 활동하였고, 한국에서도 주택개발, 모듈러 건축, 국내외 데이터센터 사업 기획 경험을 갖추고, 영어·한국어로 한국, 호주, 유럽의 정부·산업 네트워크와 협업합니다.</span></p></div>
       <div style="display:flex;flex-direction:column;gap:14px"><span class="label"><span class="en">How we work</span><span class="ko">일하는 원칙</span></span>
         <ul class="ticks"><li><span class="en">Client-side and manufacturer-neutral</span><span class="ko">발주자 편, 제조사 중립</span></li><li><span class="en">Paid feasibility before big commitments</span><span class="ko">큰 결정 전에 유상 타당성 검토</span></li><li><span class="en">Stage gates with written approvals</span><span class="ko">서면 승인 기반 단계 관리</span></li><li><span class="en">Registered specialists for regulated roles</span><span class="ko">법정 업무는 등록 전문가와 수행</span></li><li><span class="en">Partners named only once agreements are signed</span><span class="ko">파트너명은 협약 체결 후 공개</span></li></ul></div>
     </div>
@@ -486,6 +516,31 @@ footer .logo{color:var(--on-deep)}
     document.getElementById('sent').hidden=false});
 })();
 </script>
+<script>
+/* modular diagram animation: plays when visible, loops, static for reduced motion */
+(function(){
+  if(!('IntersectionObserver' in window))return;
+  var rm=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(rm)return;
+  var CYCLE=9500;
+  document.querySelectorAll('svg.dg[id]').forEach(function(svg){
+    var steps=document.querySelectorAll('.dgsteps[data-for="'+svg.id+'"] li');
+    var timers=[],loop=null;
+    svg.classList.add('ready');
+    function clear(){timers.forEach(clearTimeout);timers=[];}
+    function play(){
+      clear();svg.classList.remove('play','out');void svg.getBoundingClientRect();svg.classList.add('play');
+      steps.forEach(function(li,i){li.classList.remove('on');timers.push(setTimeout(function(){steps.forEach(function(x){x.classList.remove('on')});li.classList.add('on');},parseFloat(li.dataset.t)*1000));});
+      timers.push(setTimeout(function(){svg.classList.add('out');},CYCLE-500));
+    }
+    new IntersectionObserver(function(es){es.forEach(function(e){
+      if(e.isIntersecting){if(!loop){play();loop=setInterval(play,CYCLE);}}
+      else if(loop){clearInterval(loop);loop=null;clear();svg.classList.remove('out');}
+    });},{threshold:.35}).observe(svg);
+  });
+})();
+</script>
+
 <!-- Visitor stats: GoatCounter (cookieless, no personal data) -->
 <script data-goatcounter="https://bdvgp.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
